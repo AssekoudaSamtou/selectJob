@@ -1,0 +1,78 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Formations{% endblock %}
+
+{% block stylesheets %}<link rel="stylesheet" type="text/css" href="{{asset('css/offre/index.css')}}">{% endblock %}
+
+{% block javascripts %}<script src="{{asset('js/offre/index.js')}}"></script>{% endblock %}
+
+{% block body %}
+	<div role="main" class="container">
+		<div class="row">
+			{% for offre in offres %}
+				<div class="col-md-4">
+					<div class="card mb-4 box-shadow">
+						<div id="periodeBox{{ offre.id }}" class="alert alert-success periodeBox">
+							<div class="periode">
+								Du 21/08/2010 12:45 <br/>au 21/08/2010 17:54
+							</div>
+							<div>
+								<img src="{{asset('img/calendar.png')}}" style="width : 50px; height : 100%;margin-top:0px;">
+							</div>
+						</div>
+
+						<img src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" id="{{ offre.id }}" class="evenementImg" style="width : 100%; height : 100px;">
+						
+						<div class="card-body">
+							<p class="card-text">{{ offre.description }}</p>
+							<div class="row">
+								<div class="col-lg-6">
+									<div class="text-right">
+										<b>Organisateurs</b>
+										<img src="{{asset('img/manager.png')}}" style="width : 20%; height : 20%;">
+									</div>
+								</div>
+								<div class="col-lg-6">
+									<div class="text-left">
+										<b><a href="#">{{ offre.auteur }}</a></b>
+									</div>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-lg-6">
+									<div class="text-right">
+										<b>Salaire mini </b>
+										<img src="{{asset('img/coins.png')}}" style="width : 20%; height : 20%;">
+									</div>
+								</div>
+								<div class="col-lg-6">
+									<div class="text-left"><b>{{ offre.remuneration }}Fcfa</b></div>
+								</div>	
+							</div>
+							</div>
+							<div class="row">
+								<div class="col-lg-6">
+									<div class="text-right">
+										<b>Lieu </b>
+										<img src="{{asset('img/geo.png')}}" style="width : 20%; height : 20%;">
+									</div>
+								</div>
+								<div class="col-lg-6">
+									<div class="text-left"><b>{{ offre.auteur.localisation.ville }}</b></div>
+								</div>	
+							</div>
+							<div class="d-flex justify-content-between align-items-center">
+								<div class="btn-group">
+									<a href="#">
+										<button class="btn btn-success">postuler</button>
+									</a>
+								</div>
+								<small class=""> places restantes</small>
+							</div>
+						</div>
+					</div>
+				</div>
+			{% endfor %}
+			</div>
+	</div>
+{% endblock %}

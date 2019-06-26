@@ -1,0 +1,105 @@
+{% extends 'base.html.twig' %}
+{# {{ form_widget(form) }} #}
+
+{% block title %}ajout d'offre{% endblock %}
+{% block stylesheets %}
+	<link rel="stylesheet" href="{{ asset('css/offre/add.css') }}"/>
+{% endblock %}
+
+{% block javascripts %}
+	<script src="{{ asset('js/offre/add.js') }}"></script>
+{% endblock %}
+
+{% block body %}
+	<div role="main" class="container">
+		{{ form_start(form) }}
+		<input type="hidden" name="competences" value="">
+		<input type="hidden" name="niveaux" value="">
+		<input type="hidden" name="type" value="{{ type }}" id="">
+		<div class="row">
+			<div class="col-lg-10">
+				{{ form_widget(form) }}
+				<div class="form-group">
+					<label for="offre_emploi_fin_demande" class="required">Fins de l'offre</label>
+					<input type="date" name="offre_emploi[fin_demande]" required id="offre_emploi[fin_demande]" class="form-control">
+				</div>
+			</div>
+			
+			<div class="col-lg-10">
+				<div class="row">
+					<h3 class="col-lg-6">Compétences requises </h3>
+					<h3 class="col-lg-6 text-right">Niveau de la compétences</h3>
+				</div>
+				
+				<div class="row">
+					<div class="col-lg-6">
+						<select multiple  id="competences" class="form-control">
+							
+						</select>
+					</div>
+					<div class="col-lg-6">
+						<select multiple name="niveaux" id="niveaux" class="form-control">
+							
+						</select>
+					</div>
+						
+					<div class="row border-top p-2 col-lg-12">	
+						<div class="row col-lg-6">
+							<select id="competence_choice" class="form-control col-lg-6">
+								{% for competence in competences %}
+									<option value="{{competence.id}}">{{competence.libelle}}</option>
+								{% endfor %}
+							</select>
+							<select id="niveaux_choice" class="form-control col-lg-4">
+								<option value="1">Débutant</option>
+								<option value="2">Amateur</option>
+								<option value="3">Professionnel</option>
+							</select>
+							
+							<span id="btn__add" class="btn btn-outline-success col-lg-2">
+								<span class="fa fa-plus"></span>
+							</span>
+						</div>
+							
+						<div class="row col-lg-6">
+							<div class="col-lg-2"></div>
+
+							<span id="btn__autre" class="btn  btn-outline-warning col-lg-2">
+								<span class="">Autre</span>
+							</span>
+							{# <div class="col-lg-1"></div> #}
+
+							<input type="text" id="input_autre" class="form-control col-lg-3" />
+
+							<select id="niveaux_choice_new" class="form-control col-lg-3">
+								<option value="1">Débutant</option>
+								<option value="2">Amateur</option>
+								<option value="3">Professionnel</option>
+							</select>
+							<span id="btn_new_add" class="btn btn-outline-success col-lg-2">
+								<span class="fa fa-plus"></span>
+							</span>
+							
+							{# <div class="col-lg-5"></div> #}
+						</div>
+					</div>
+				</div>
+				<div class="competence-form">
+				</div>
+			</div>
+		</div>
+
+
+		<div>
+			<div class="container">
+				<div class="row">
+					<div class="col-lg-2 offset-10">
+						<button type='submit' class='btn btn-outline-primary'>Terminer</button>
+					</div>
+				</div>
+			</div>
+		</div>
+		{{ form_end(form) }}
+				
+	</div>
+{% endblock %}

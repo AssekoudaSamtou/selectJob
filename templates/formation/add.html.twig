@@ -1,0 +1,85 @@
+{% extends 'base.html.twig' %}
+{# {{ form_widget(form) }} #}
+
+{% block title %}ajout d'une formation{% endblock %}
+{% block stylesheets %}
+	<link rel="stylesheet" href="{{ asset('css/formation/add.css') }}"/>
+{% endblock %}
+
+{% block javascripts %}
+	<script src="{{ asset('js/formation/add.js') }}"></script>
+{% endblock %}
+
+{% block body %}
+	<div role="main" class="container">
+		{{ form_start(form) }}
+		<input type="hidden" name="prerequis" value="">
+		<div class="row">
+			<div class="col-lg-10">
+				{{ form_widget(form) }}
+				<div class="form-group">
+					<label for="formation_fin_demande" class="required">Cloture de l'inscription</label>
+					<input type="date" name="formation[fin_demande]" required id="formation[fin_demande]" class="form-control">
+				</div>
+			</div>
+			
+			<div class="col-lg-10">
+				<div class="row">
+					<h3 class="col-lg-6">Prérequis </h3>
+				</div>
+				
+				<div class="row">
+					<div class="col-lg-6">
+						<div class="row col-lg-12 m-2">
+							<select id="prerequis_choice" class="form-control col-lg-10">
+								{% for pre in prerequis %}
+									<option value="{{pre.id}}">{{pre.description}}</option>
+								{% endfor %}
+							</select>
+							
+							<span id="btn__add" class="btn btn-outline-success col-lg-2">
+								<span class="fa fa-plus"></span>
+							</span>
+						</div>
+						
+						<div class="row col-lg-12">
+
+							<span id="btn__autre" class="btn  btn-outline-warning col-lg-2">
+								<span class="">Autre</span>
+							</span>
+							<div class="col-lg-2"></div>
+
+							<input type="text" id="input_autre" class="form-control col-lg-6" />
+
+							<span id="btn_new_add" class="btn btn-outline-success col-lg-2">
+								<span class="fa fa-plus"></span>
+							</span>
+							
+						</div>
+					</div>
+					<div class="col-lg-6">
+						<select multiple  id="prerequis" class="form-control">
+							
+						</select>
+					</div>
+						
+				</div>
+				<div class="competence-form">
+				</div>
+			</div>
+		</div>
+
+
+		<div>
+			<div class="container">
+				<div class="row">
+					<div class="col-lg-2 offset-10">
+						<button type='submit' class='btn btn-outline-primary'>Terminer</button>
+					</div>
+				</div>
+			</div>
+		</div>
+		{{ form_end(form) }}
+				
+	</div>
+{% endblock %}

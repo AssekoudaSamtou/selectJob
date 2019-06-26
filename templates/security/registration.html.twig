@@ -1,0 +1,66 @@
+{% extends 'base.html.twig' %}
+{# {{ form_widget(form) }} #}
+
+{% block title %}Inscription{% endblock %}
+{% block stylesheets %}
+	<link rel="stylesheet" href="{{ asset('css/security/register.css') }}">
+{% endblock %}
+
+{% block javascripts %}
+	<script src="{{ asset('js/security/index.js') }}"></script>
+{% endblock %}
+
+{% block body %}
+	<div class="container">
+		<input type="hidden" value="1" id="current_step">
+		<input type="hidden" value="P" id="type_compte">
+		{{ form_start(form) }}
+		<div class="row formulaire">
+			<div class="col-lg-10 etape" id="etape1">
+				<h1 id="etape__title">Etape N°1</h1>
+				<div class="form-group form_group_etape1">
+					{{ form_row(form.username, {'attr' : {'placeholder' : 'Username', 'class' : 'form-control'} }) }}
+					{{ form_row(form.email, { 'attr' : {'placeholder' : 'E-mail...', 'class' : 'form-control'} }) }}
+				</div>
+				
+				<div class="form-group form_group_etape1">
+					{{ form_row(form.password, { 'attr' : {'placeholder' : 'Password', 'class' : 'form-control'} }) }}
+					{{ form_row(form.comfirmPassword, { 'attr' : {'placeholder' : 'Comfirm Password', 'class' : 'form-control'} }) }}
+				</div>
+				{{ form_rest(form) }}
+			</div>
+
+			<div class="col-lg-10 etape" id="etape2">
+				<h2>Quel type de compte voulez vous creer ?</h2>
+				<div class="form-group">
+					<input type="radio" name="type_compte" id="type_particulier" value="P">
+					<b><label for="type_particulier">Particulier</label></b>
+				</div>
+				<div class="form-group">
+					<input type="radio" name="type_compte" id="type_entreprise" value="E">
+					<b><label for="type_entreprise">Entreprise</label></b>
+				</div>
+			</div>
+			<div class="col-lg-10 etape" id="etape3">
+				{{ form_widget(entrepriseForm) }}
+				{{ form_widget(particulierForm) }}
+			</div>
+		</div>
+
+		<div>
+			<div class="container" id="etape__switch">
+				<div class="row">
+					<div class="col-lg-3 offset-3" >
+						<span class="btn btn-primary" id="previous_step">Précédant</span>
+					</div>
+					<div class="col-lg-3 offset-3" id="test_container">
+						<span class="btn btn-primary" id="next_step">Suivant</span>
+						<button type='submit' class='btn btn-success'>Terminer</button>
+					</div>
+				</div>
+			</div>
+		</div>
+		{{ form_end(form) }}
+				
+	</div>
+{% endblock %}

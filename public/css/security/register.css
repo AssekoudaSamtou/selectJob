@@ -1,0 +1,44 @@
+.form_group_etape1{
+	display: flex;
+	justify-content: space-between;
+	flex-direction: row;
+}
+.form_group_etape1 div{
+	width: 45%;
+}
+.etape{
+	display: flex;
+	flex-direction: column;
+	align-self: center;
+}
+#etape1, #etape2, #etape3{
+	align-self: center;
+	margin: auto;
+	display: none;
+}
+#etape1{
+	align-self: center;
+	margin: auto;
+	display: block;
+}
+#etape__switchzzz{
+	display: flex;
+	flex-direction: row;
+	align-self: center;
+	margin-left: 100px;
+	margin-right: 100px;
+	align-items: center;
+	justify-content: space-between;
+}
+.formulaire{
+	margin-top: 50px;
+	height: 300px;
+	overflow: scroll;
+	box-shadow: 0px 4px 4px #1c1a19;
+}
+#entreprise{
+	display: none
+}
+button[type="submit"]{
+	display: none;
+}
