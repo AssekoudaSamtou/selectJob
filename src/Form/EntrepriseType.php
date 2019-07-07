@@ -24,8 +24,8 @@ class EntrepriseType extends AbstractType
             ))
             ->add('secteur', EntityType::class, array(
                 'class' =>Secteur::class,
-                'choice_label' => 'libelle',
-                'label' => 'secteur d\'activité'
+                'choice_label' => 'libelle'
+                // 'label' => 'secteur d\'activité'
             ))
             ->add('localisation', EntityType::class, array(
                 'class' =>Localisation::class,

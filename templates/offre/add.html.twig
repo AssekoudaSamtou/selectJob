@@ -18,7 +18,13 @@
 		<input type="hidden" name="type" value="{{ type }}" id="">
 		<div class="row">
 			<div class="col-lg-10">
-				{{ form_widget(form) }}
+				{{ form_row(form.titre, {'attr' : {'class' : 'form-control'}}) }}
+				{{ form_row(form.description, {'attr' : {'class' : 'form-control'}}) }}
+				{{ form_row(form.nb_experience, {'attr' : {'class' : 'form-control'}}) }}
+				{{ form_row(form.remuneration, {'attr' : {'class' : 'form-control'}}) }}
+				{{ form_row(form.email, {'attr' : {'class' : 'form-control'}}) }}
+				{{ form_row(form.telephone, {'attr' : {'class' : 'form-control'}}) }}
+				{{ form_row(form.duree, {'attr' : {'class' : 'form-control'}}) }}
 				<div class="form-group">
 					<label for="offre_emploi_fin_demande" class="required">Fins de l'offre</label>
 					<input type="date" name="offre_emploi[fin_demande]" required id="offre_emploi[fin_demande]" class="form-control">

@@ -22,19 +22,19 @@ class SecteurRepository extends ServiceEntityRepository
     // /**
     //  * @return Secteur[] Returns an array of Secteur objects
     //  */
-    /*
-    public function findByExampleField($value)
+    
+    public function findOneByLibelle($value)
     {
         return $this->createQueryBuilder('s')
-            ->andWhere('s.exampleField = :val')
+            ->andWhere('s.libelle = :val')
             ->setParameter('val', $value)
             ->orderBy('s.id', 'ASC')
-            ->setMaxResults(10)
+            ->setMaxResults(1)
             ->getQuery()
             ->getResult()
         ;
     }
-    */
+    
 
     /*
     public function findOneBySomeField($value): ?Secteur

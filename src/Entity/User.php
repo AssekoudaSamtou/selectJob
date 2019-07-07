@@ -57,6 +57,11 @@ class User implements UserInterface, \Serializable
     private $particulier;
 
     /**
+     * @ORM\OneToOne(targetEntity="App\Entity\Entreprise", mappedBy="user", cascade={"persist", "remove"})
+     */
+    private $entreprise;
+
+    /**
      * @ORM\OneToMany(targetEntity="App\Entity\Discussion", mappedBy="expediteur", orphanRemoval=true)
      */
     private $discussions;
@@ -171,6 +176,23 @@ class User implements UserInterface, \Serializable
         // set the owning side of the relation if necessary
         if ($this !== $particulier->getUser()) {
             $particulier->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function getEntreprise(): ?Entreprise
+    {
+        return $this->entreprise;
+    }
+
+    public function setEntreprise(Entreprise $entreprise): self
+    {
+        $this->entreprise = $entreprise;
+
+        // set the owning side of the relation if necessary
+        if ($this !== $entreprise->getUser()) {
+            $entreprise->setUser($this);
         }
 
         return $this;

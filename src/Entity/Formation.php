@@ -118,6 +118,13 @@ class Formation
         return $this->Prerequis;
     }
 
+    public function emptyPrerequis(): self
+    {
+        $this->Prerequis = new ArrayCollection();
+        
+        return $this;
+    }
+
     public function addPrerequi(Prerequis $prerequi): self
     {
         if (!$this->Prerequis->contains($prerequi)) {
@@ -253,5 +260,13 @@ class Formation
         $this->description = $description;
 
         return $this;
+    }
+
+    public function isSuscribed(Particulier $postulant)
+    {
+        if ($this->postulants->contains($postulant)) {
+            return true;
+        }
+        return false;
     }
 }

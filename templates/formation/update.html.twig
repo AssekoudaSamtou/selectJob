@@ -1,0 +1,96 @@
+{% extends 'base.html.twig' %}
+{# {{ form_widget(form) }} #}
+
+{% block title %}modification d'une formation{% endblock %}
+{% block stylesheets %}
+	<link rel="stylesheet" href="{{ asset('css/formation/update.css') }}"/>
+{% endblock %}
+
+{% block javascripts %}
+	<script src="{{ asset('js/formation/update.js') }}"></script>
+{% endblock %}
+
+{% block body %}
+	<div role="main" class="container">
+		{{ form_start(form) }}
+		<input type="hidden" name="prerequis" value="{% for formationPre in formationPrerequis %}___{{formationPre.id}}{% endfor %}">
+		<div class="row">
+			<div class="col-lg-10">
+				{{ form_row(form.titre, {'attr' : {'class' : 'form-control'}}) }}
+				{{ form_row(form.description, {'attr' : {'class' : 'form-control'}}) }}
+				{{ form_row(form.frais_inscription, {'attr' : {'class' : 'form-control'}}) }}
+				{{ form_row(form.frais_formation, {'attr' : {'class' : 'form-control'}}) }}
+				{{ form_row(form.email, {'attr' : {'class' : 'form-control'}}) }}
+				{{ form_row(form.telephone, {'attr' : {'class' : 'form-control'}}) }}
+				{{ form_row(form.lieu, {'attr' : {'class' : 'form-control'}}) }}
+				<div class="form-group">
+					<label for="formation_fin_demande" class="required">Cloture de l'inscription</label>
+					<input type="date" name="formation[fin_demande]" required id="formation[fin_demande]" class="form-control">
+				</div>
+			</div>
+			
+			<div class="col-lg-10">
+				<div class="row">
+					<h3 class="col-lg-6">Prérequis </h3>
+				</div>
+				
+				<div class="row">
+					<div class="col-lg-5">
+						<div class="row col-lg-12 m-2">
+							<select id="prerequis_choice" class="form-control col-lg-10">
+								{% for pre in prerequis %}
+									<option value="{{pre.id}}">{{pre.description}}</option>
+								{% endfor %}
+							</select>
+							
+							<span id="btn__add" class="btn btn-outline-success col-lg-2">
+								<span class="fa fa-plus"></span>
+							</span>
+						</div>
+						
+						<div class="row col-lg-12">
+
+							<span id="btn__autre" class="btn  btn-outline-warning col-lg-2">
+								<span class="">Autre</span>
+							</span>
+							<div class="col-lg-2"></div>
+
+							<input type="text" id="input_autre" class="form-control col-lg-6" />
+
+							<span id="btn_new_add" class="btn btn-outline-success col-lg-2">
+								<span class="fa fa-plus"></span>
+							</span>
+							
+						</div>
+					</div>
+					<div class="col-lg-1">
+						<span id="btn__remove" class="btn btn-danger"><i class="fa fa-trash"></i></span>
+					</div>
+					<div class="col-lg-6">
+						<select multiple  id="prerequis" class="form-control">
+							{% for formationPre in formationPrerequis %}
+								<option value="{{formationPre.id}}">{{formationPre.description}}</option>
+							{% endfor %}
+						</select>
+					</div>
+						
+				</div>
+				<div class="competence-form">
+				</div>
+			</div>
+		</div>
+
+
+		<div>
+			<div class="container">
+				<div class="row">
+					<div class="col-lg-2 offset-10">
+						<button type='submit' class='btn btn-outline-primary'>Sauvegarder</button>
+					</div>
+				</div>
+			</div>
+		</div>
+		{{ form_end(form) }}
+				
+	</div>
+{% endblock %}

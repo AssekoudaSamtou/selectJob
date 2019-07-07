@@ -39,3 +39,6 @@
 div[role="main"]{
   margin-top: 100px;
 }
+.btn-desinscrire{
+  /*display: none;*/
+}

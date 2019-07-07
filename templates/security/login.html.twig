@@ -1,7 +1,7 @@
 {% extends 'base.html.twig' %}
 
 {% block stylesheets %}
-	<link rel="stylesheet" type="text/css" href="{{asset('css/signin.css')}}">
+	<link rel="stylesheet" type="text/css" href="{{asset('css/all/signin.css')}}">
 {% endblock %}
 
 {% block body %}
@@ -21,6 +21,10 @@
 
 				
 				<button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+				<div>
+					<a href="{{path('security_registration')}}">Créer un compte </a>
+					<a href="#"> Mot de passe oublié ?</a>
+				</div>
 				<p class="mt-5 mb-3 text-muted">&copy; selectJob</p>
 			</form>
 		</div>

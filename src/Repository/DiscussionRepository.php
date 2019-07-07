@@ -22,19 +22,21 @@ class DiscussionRepository extends ServiceEntityRepository
     // /**
     //  * @return Discussion[] Returns an array of Discussion objects
     //  */
-    /*
-    public function findByExampleField($value)
+    
+    public function findByCouple($exp, $dest)
     {
         return $this->createQueryBuilder('d')
-            ->andWhere('d.exampleField = :val')
-            ->setParameter('val', $value)
+            ->andWhere('d.expediteur = :exp', 'd.destinataire = :dest')
+            ->orWhere('d.destinataire = :exp', 'd.expediteur = :dest')
+            ->setParameter('exp', $exp)
+            ->setParameter('dest', $dest)
             ->orderBy('d.id', 'ASC')
-            ->setMaxResults(10)
+            ->setMaxResults(10000)
             ->getQuery()
             ->getResult()
         ;
     }
-    */
+    
 
     /*
     public function findOneBySomeField($value): ?Discussion

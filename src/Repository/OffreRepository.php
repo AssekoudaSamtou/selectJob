@@ -22,19 +22,17 @@ class OffreRepository extends ServiceEntityRepository
     // /**
     //  * @return Offre[] Returns an array of Offre objects
     //  */
-    /*
-    public function findByExampleField($value)
+    public function findAllByCategorie($value)
     {
-        return $this->createQueryBuilder('o')
-            ->andWhere('o.exampleField = :val')
+        return $this->createQueryBuilder('p')
+            ->andWhere('p.categorie = :val')
             ->setParameter('val', $value)
-            ->orderBy('o.id', 'ASC')
+            ->orderBy('p.id', 'ASC')
             ->setMaxResults(10)
             ->getQuery()
             ->getResult()
         ;
     }
-    */
 
     /*
     public function findOneBySomeField($value): ?Offre

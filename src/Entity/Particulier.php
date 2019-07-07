@@ -270,4 +270,15 @@ class Particulier
     {
        return $this->nom;
     }
+
+    public function getPartenaires() {
+        $entreprises = new ArrayCollection();
+
+        foreach ($this->formations as $formation) {
+            if (!$entreprises->contains($formation->getAuteur())) {
+                $entreprises[] = $formation->getAuteur();
+            }
+        }
+        return $entreprises;
+    }
 }

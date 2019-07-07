@@ -16,7 +16,13 @@
 		<input type="hidden" name="prerequis" value="">
 		<div class="row">
 			<div class="col-lg-10">
-				{{ form_widget(form) }}
+				{{ form_row(form.titre, {'attr' : {'class' : 'form-control'}}) }}
+				{{ form_row(form.description, {'attr' : {'class' : 'form-control'}}) }}
+				{{ form_row(form.frais_inscription, {'attr' : {'class' : 'form-control'}}) }}
+				{{ form_row(form.frais_formation, {'attr' : {'class' : 'form-control'}}) }}
+				{{ form_row(form.email, {'attr' : {'class' : 'form-control'}}) }}
+				{{ form_row(form.telephone, {'attr' : {'class' : 'form-control'}}) }}
+				{{ form_row(form.lieu, {'attr' : {'class' : 'form-control'}}) }}
 				<div class="form-group">
 					<label for="formation_fin_demande" class="required">Cloture de l'inscription</label>
 					<input type="date" name="formation[fin_demande]" required id="formation[fin_demande]" class="form-control">

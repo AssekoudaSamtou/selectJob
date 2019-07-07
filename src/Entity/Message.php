@@ -17,7 +17,7 @@ class Message
     private $id;
 
     /**
-     * @ORM\Column(type="text")
+     * @ORM\Column(type="string", length=5000)
      */
     private $contenu;
 
@@ -35,6 +35,11 @@ class Message
      * @ORM\OneToOne(targetEntity="App\Entity\Discussion", mappedBy="message", cascade={"persist", "remove"})
      */
     private $discussion;
+
+    public function __construct()
+    {
+        $this->createdAt = new \DateTime();
+    }
 
     public function getId(): ?int
     {

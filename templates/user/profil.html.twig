@@ -1,0 +1,279 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Profil {% endblock %}
+{% block stylesheets %}
+	<link rel="stylesheet" href="{{ asset('css/user/profil.css') }}"/>
+	<link rel="stylesheet" type="text/css" href="{{asset('css/formation/index.css')}}">
+{% endblock %}
+
+{% block javascripts %}
+	<script src="{{ asset('js/user/profil.js') }}"></script>
+	<script src="{{asset('js/formation/index.js')}}"></script>
+{% endblock %}
+
+{% block body %}
+
+	{% if type == "P" %}
+		<div role="main" class="container">
+			<div style="width : 80%; margin : auto;">
+				<div id="cv_box" class="d-flex flex-column">
+					<section class="d-flex flex-row justify-content-between">
+						<div class="d-flex flex-column">
+							<b><span style="text-transform:uppercase;">{{ compte.nom }}</span> {{ compte.prenom }}</b>
+							<span>Né le 12/03/2019 (20 ans) Lomé,  Togo</span>
+							<span><b>Sexe</b> : {{ compte.sexe }}</span>
+							<span><b>Adresse</b> : Agoè Camp GP </span>
+							<span><b>Téléphone</b> : (+228) {{ compte.telephone }} </span>
+							<span><b>E-mail</b> : <a href="mailto:{{ compte.user.email }}">{{ compte.user.email }}</a></span>
+						</div>
+						<div class="d-flex flex-column justify-content-end ">
+							<img class="featurette-image img-fluid mx-auto" src="{{ asset('img/user.png') }}" alt="image" style="height: 100%;">
+						</div>
+					</section><hr/>
+
+					<section class="d-flex flex-column">
+						<p class="h3 strong text-center" style="text-transform:capitalize;">{# Elève en Génie-Logiciel à ESGIS #} {{ compte.profession.libelle }}</p>
+					</section><hr/>
+
+					<section class="d-flex flex-column align-items-center">
+						<p class="h4 text-center" style="text-decoration: underline;">Diplomes</p>
+						<span><b>2018 - 2019</b> : Licence 2ème Année Génie-Logiciel à ESGIS <span class="lead">(en cours)</span>.</span>
+						<span><b>2017 - 2018</b> : Licence 1ère Année Génie-Logiciel à ESGIS.</span>
+						<span><b>Aout 2017</b> &nbsp;&nbsp;: Baccalauréat F3 (Electrotechnique), <span class="lead">Mention Bien</span> .</span>
+					</section><hr/>
+					
+					<section class="d-flex flex-column align-items-center">
+						<p class="h4 text-center" style="text-decoration: underline;">Projets Réalisés(expereinces)</p>
+						<span><b>2018 - 2019</b> : Licence 2ème Année Génie-Logiciel à ESGIS <span class="lead">(en cours)</span>.</span>
+						<span><b>2017 - 2018</b> : Licence 1ère Année Génie-Logiciel à ESGIS.</span>
+						<span><b>Aout 2017</b> &nbsp;&nbsp;: Baccalauréat F3 (Electrotechnique), <span class="lead">Mention Bien</span> .</span>
+					</section><hr/>
+					<section class="d-flex flex-column align-items-center">
+						<p class="h4 text-center" style="text-decoration: underline;">Compétences</p>
+						<span><b>2018 - 2019</b> : Licence 2ème Année Génie-Logiciel à ESGIS <span class="lead">(en cours)</span>.</span>
+						<span><b>2017 - 2018</b> : Licence 1ère Année Génie-Logiciel à ESGIS.</span>
+						<span><b>Aout 2017</b> &nbsp;&nbsp;: Baccalauréat F3 (Electrotechnique), <span class="lead">Mention Bien</span> .</span>
+					</section><hr/>
+					<section class="d-flex flex-column align-items-center">
+						<p class="h4 text-center" style="text-decoration: underline;">Langues Parlées</p>
+						<span><b>2018 - 2019</b> : Licence 2ème Année Génie-Logiciel à ESGIS <span class="lead">(en cours)</span>.</span>
+						<span><b>2017 - 2018</b> : Licence 1ère Année Génie-Logiciel à ESGIS.</span>
+						<span><b>Aout 2017</b> &nbsp;&nbsp;: Baccalauréat F3 (Electrotechnique), <span class="lead">Mention Bien</span> .</span>
+					</section><hr/>
+					<section class="d-flex flex-column align-items-center">
+						<p class="h4 text-center" style="text-decoration: underline;">Loisir</p>
+						<span><b>2018 - 2019</b> : Licence 2ème Année Génie-Logiciel à ESGIS <span class="lead">(en cours)</span>.</span>
+						<span><b>2017 - 2018</b> : Licence 1ère Année Génie-Logiciel à ESGIS.</span>
+						<span><b>Aout 2017</b> &nbsp;&nbsp;: Baccalauréat F3 (Electrotechnique), <span class="lead">Mention Bien</span> .</span>
+					</section><hr/>
+					<section class="d-flex flex-column align-items-center">
+						
+					</section><hr/>
+			</div>
+			</div>
+		</div>
+	{% elseif type == "E" %}
+		<div role="main" class="container">
+			<div style="width : 80%; margin : auto;">
+				<div id="cv_box" class="d-flex flex-column">
+					<section class="d-flex flex-row justify-content-between">
+						<div class="d-flex flex-column">
+							<b><span style="text-transform:uppercase;">{{ compte.nom }}</span></b>
+							{# <span>Né le 12/03/2019 (20 ans) Lomé,  Togo</span> #}
+							{# <span><b>Etat civil</b> : célibataire</span> #}
+							<span><b>Adresse</b> : {{ compte.localisation }} </span>
+							<span><b>Téléphone</b> : (+228) 91-97-14-36 </span>
+							<span><b>E-mail</b> : <a href="mailto:{{ compte.user.email }}">{{ compte.user.email }}</a></span>
+						</div>
+						<div class="d-flex flex-column justify-content-end ">
+							<img class="featurette-image img-fluid mx-auto" src="{{ asset('img/building.png') }}" alt="image" style="height: 100%;">
+						</div>
+					</section><hr/>
+
+					<section class="d-flex flex-column">
+						<p class="h3 strong text-center">Secteur : {{ compte.secteur.libelle }}</p>
+					</section><hr/>
+			</div>
+			</div>
+
+			{% if app.user.particulier %}
+				<hr/>
+				<section class="d-flex flex-column">
+					<p class="h3 strong text-center">FORMATIONS</p>
+				</section><hr/>
+
+				{% for formation in compte.formations %}
+					<div class="col-md-4">
+						<div class="card mb-4 box-shadow">
+							<div id="periodeBox{{ formation.id }}" class="alert alert-success periodeBox">
+								<div class="periode">
+									Du 21/08/2010 12:45 <br/>au 21/08/2010 17:54
+								</div>
+								<div>
+									<img src="{{asset('img/calendar.png')}}" style="width : 50px; height : 100%;margin-top:0px;">
+								</div>
+							</div>
+
+							<img src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" id="{{ formation.id }}" class="evenementImg" style="width : 100%; height : 100px;">
+							
+							<div class="card-body">
+								<p class="card-text">{{ formation.description }}</p>
+								<div class="row">
+									<div class="col-lg-6">
+										<div class="text-right">
+											<b>Prix </b>
+											<img src="{{asset('img/coins.png')}}" style="width : 20%; height : 20%;">
+										</div>
+									</div>
+									<div class="col-lg-6">
+										<div class="text-left"><b>{{ formation.fraisInscription }}Fcfa</b></div>
+									</div>	
+								</div>
+								<div class="row">
+									<div class="col-lg-6">
+										<div class="text-right">
+											<b>Lieu </b>
+											<img src="{{asset('img/geo.png')}}" style="width : 20%; height : 20%;">
+										</div>
+									</div>
+									<div class="col-lg-6">
+										<div class="text-left"><b>{{ formation.lieu }}</b></div>
+									</div>	
+								</div>
+								{% if app.user %}
+									{% if app.user.particulier %}
+										<div class="d-flex justify-content-between align-items-center">
+											<div class="bd-example" id="formation_state{{ formation.id }}">
+											  <button type="button" value="{{ formation.id }}" class="btn btn-primary btn-inscrire-formation" data-toggle="modal" data-target="#formationModal" style="border-radius: 14.25rem;{% if formation.isSuscribed(app.user.particulier) %} display: none;{% endif %}" >
+												S'inscrire
+											  </button>
+											  <button id="btn-desinscrire{{ formation.id }}" type="button" value="{{ formation.id }}" class="btn btn-danger btn-desinscrire-formation" style="border-radius: 14.25rem; {% if not formation.isSuscribed(app.user.particulier) %} display: none;{% endif %}" >
+												<span class="fa fa-trash-o"></span> Anuller l'inscription
+											  </button>
+											</div>
+										</div>
+									{% endif %}
+								{% endif %}
+							</div>
+						</div>
+					</div>
+				{% endfor %}
+				<div id="formationModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="formationModalLabel" aria-hidden="true">
+					<div class="modal-dialog" role="document">
+						<div class="modal-content">
+							<div class="modal-header">
+								<h5 class="modal-title" id="exampleModalLiveLabel">Confirmation de l'inscription</h5>
+								<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+									<span aria-hidden="true">&times;</span>
+								</button>
+							</div>
+							<div class="modal-body">
+								<b>Monsieur <span class="lead">{{ app.user.particulier.prenom }}</span>, etes-vous sur de vouloir participer à cette formation ?</b>
+							</div>
+							<div class="modal-footer">
+								<button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
+								<button type="button" id="btn-confirmer-formation" value="" class="btn btn-primary" data-dismiss="modal">Confirmer</button>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<hr/>
+				<section class="d-flex flex-column">
+					<p class="h3 strong text-center">OFFRES</p>
+				</section><hr/>
+
+				{% for offre in compte.offres %}
+					<div class="col-md-4">
+						<div class="card mb-4 box-shadow">
+							<div id="periodeBox{{ offre.id }}" class="alert alert-success periodeBox">
+								<div class="periode">
+									Du 21/08/2010 12:45 <br/>au 21/08/2010 17:54
+								</div>
+								<div>
+									<img src="{{asset('img/calendar.png')}}" style="width : 50px; height : 100%;margin-top:0px;">
+								</div>
+							</div>
+
+							<img src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" id="{{ offre.id }}" class="evenementImg" style="width : 100%; height : 100px;">
+							
+							<div class="card-body">
+								<p class="card-text">{{ offre.description }}</p>
+								<div class="row">
+									<div class="col-lg-6">
+										<div class="text-right">
+											<b>Organisateurs</b>
+											<img src="{{asset('img/manager.png')}}" style="width : 20%; height : 20%;">
+										</div>
+									</div>
+									<div class="col-lg-6">
+										<div class="text-left">
+											<b><a href="{{ path('user_profil', {user: offre.auteur.user.id}) }}">{{ offre.auteur }}</a></b>
+										</div>
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-lg-6">
+										<div class="text-right">
+											<b>Salaire mini </b>
+											<img src="{{asset('img/coins.png')}}" style="width : 20%; height : 20%;">
+										</div>
+									</div>
+									<div class="col-lg-6">
+										<div class="text-left"><b>{{ offre.remuneration }}Fcfa</b></div>
+									</div>	
+								</div>
+								<div class="row">
+									<div class="col-lg-6">
+										<div class="text-right">
+											<b>Lieu </b>
+											<img src="{{asset('img/geo.png')}}" style="width : 20%; height : 20%;">
+										</div>
+									</div>
+									<div class="col-lg-6">
+										<div class="text-left"><b>{{ offre.auteur.localisation.ville }}</b></div>
+									</div>	
+								</div>
+							</div>
+								{% if app.user %}
+									{% if app.user.particulier %}
+										<div class="d-flex justify-content-between align-items-center">
+											<div class="bd-example" id="offre_state{{ offre.id }}">
+											  <button type="button" value="{{ offre.id }}" class="btn btn-primary btn-inscrire-offre" data-toggle="modal" data-target="#offreModal" style="border-radius: 14.25rem;{% if offre.isSuscribed(app.user.particulier) %} display: none;{% endif %}" >
+												Postuler
+											  </button>
+											  <button id="btn-desinscrire{{ offre.id }}" type="button" value="{{ offre.id }}" class="btn btn-danger btn-desinscrire-offre" style="border-radius: 14.25rem; {% if not offre.isSuscribed(app.user.particulier) %} display: none;{% endif %}" >
+												<span class="fa fa-trash-o"></span> anuller la demande
+											  </button>
+											</div>
+										</div>
+									{% endif %}
+								{% endif %}
+							</div>
+						</div>
+					</div>
+				{% endfor %}
+				<div id="offreModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="offreModalLabel" aria-hidden="true">
+					<div class="modal-dialog" role="document">
+						<div class="modal-content">
+							<div class="modal-header">
+								<h5 class="modal-title" id="exampleModalLiveLabel">Confirmation de l'inscription</h5>
+								<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+									<span aria-hidden="true">&times;</span>
+								</button>
+							</div>
+							<div class="modal-body">
+								<b>Monsieur <b class="lead">{{ app.user.particulier.prenom }}</b>, etes-vous sur de vouloir postuler à cette offre ?</b>
+							</div>
+							<div class="modal-footer">
+								<button type="button" class="btn btn-danger" data-dismiss="modal">Annuler</button>
+								<button type="button" id="btn-confirmer-offre" value="" class="btn btn-primary" data-dismiss="modal">Confirmer</button>
+							</div>
+						</div>
+					</div>
+				</div>
+			{% endif %}
+		</div>
+	{% endif %}
+	
+{% endblock %}

@@ -19,7 +19,7 @@ class OffreStageType extends AbstractType
             ->add('description')
             ->add('remuneration')
             ->add('duree')
-            ->add('fin_demande')
+            // ->add('fin_demande')
             // ->add('categorie')
             // ->add('auteur')
         ;

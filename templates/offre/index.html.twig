@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Formations{% endblock %}
+{% block title %}offres{% endblock %}
 
 {% block stylesheets %}<link rel="stylesheet" type="text/css" href="{{asset('css/offre/index.css')}}">{% endblock %}
 
@@ -8,6 +8,7 @@
 
 {% block body %}
 	<div role="main" class="container">
+		<input type="hidden" value="{{ app.user.particulier.id }}" id="particulier">
 		<div class="row">
 			{% for offre in offres %}
 				<div class="col-md-4">
@@ -34,7 +35,7 @@
 								</div>
 								<div class="col-lg-6">
 									<div class="text-left">
-										<b><a href="#">{{ offre.auteur }}</a></b>
+										<b><a href="{{ path('user_profil', {user: offre.auteur.user.id}) }}">{{ offre.auteur }}</a></b>
 									</div>
 								</div>
 							</div>
@@ -61,18 +62,48 @@
 									<div class="text-left"><b>{{ offre.auteur.localisation.ville }}</b></div>
 								</div>	
 							</div>
-							<div class="d-flex justify-content-between align-items-center">
-								<div class="btn-group">
-									<a href="#">
-										<button class="btn btn-success">postuler</button>
-									</a>
-								</div>
-								<small class=""> places restantes</small>
-							</div>
+							{% if app.user %}
+								{% if app.user.particulier %}
+									<div class="d-flex justify-content-between align-items-center">
+										<div class="bd-example" id="offre_state{{ offre.id }}">
+										  <button type="button" value="{{ offre.id }}" class="btn btn-primary btn-inscrire" data-toggle="modal" data-target="#exampleModalLive" style="border-radius: 14.25rem;{% if offre.isSuscribed(app.user.particulier) %} display: none;{% endif %}" >
+											Postuler
+										  </button>
+										  <button id="btn-desinscrire{{ offre.id }}" type="button" value="{{ offre.id }}" class="btn btn-danger btn-desinscrire" style="border-radius: 14.25rem; {% if not offre.isSuscribed(app.user.particulier) %} display: none;{% endif %}" >
+											<span class="fa fa-trash-o"></span> anuller la demande
+										  </button>
+										</div>
+									</div>
+								{% endif %}
+							{% endif %}
 						</div>
 					</div>
 				</div>
 			{% endfor %}
+			
+			{% if offres | length == 0 %}
+				<p class="lead">Ooups !!! Aucune offre part ici !</p>
+			{% endif %}
 			</div>
+	</div>
+
+	<div id="exampleModalLive" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="exampleModalLiveLabel" aria-hidden="true">
+	  <div class="modal-dialog" role="document">
+		<div class="modal-content">
+		  <div class="modal-header">
+			<h5 class="modal-title" id="exampleModalLiveLabel">Confirmation de l'inscription</h5>
+			<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+			  <span aria-hidden="true">&times;</span>
+			</button>
+		  </div>
+		  <div class="modal-body">
+			<b>Monsieur <b class="lead">{{ app.user.particulier.prenom }}</b>, etes-vous sur de vouloir postuler à cette offre ?</b>
+		  </div>
+		  <div class="modal-footer">
+			<button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
+			<button type="button" id="btn-confirmer" value="" class="btn btn-primary" data-dismiss="modal">Confirmer</button>
+		  </div>
+		</div>
+	  </div>
 	</div>
 {% endblock %}

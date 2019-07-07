@@ -73,13 +73,13 @@
             <img class="rounded-circle" src="{{asset('img/about1.jpg')}}" alt="Generic placeholder image" width="140" height="140">
             <h2>Stages</h2>
             <p>Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Cras mattis consectetur purus sit amet fermentum. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh.</p>
-            <p><a class="btn btn-secondary" href="{{path('offres')}}" role="button">View details &raquo;</a></p>
+            <p><a class="btn btn-secondary" href="{{path('offres', {type : '2'})}}" role="button">View details &raquo;</a></p>
           </div><!-- /.col-lg-3 -->
           <div class="col-lg-3">
             <img class="rounded-circle" src="{{asset('img/about3.jpg')}}" alt="Generic placeholder image" width="140" height="140">
             <h2>Emplois</h2>
             <p>Donec sed odio dui. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Vestibulum id ligula porta felis euismod semper. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.</p>
-            <p><a class="btn btn-secondary" href="#" role="button">View details &raquo;</a></p>
+            <p><a class="btn btn-secondary" href="{{path('offres', {type : '1'})}}" role="button">View details &raquo;</a></p>
           </div><!-- /.col-lg-3 -->
           <div class="col-lg-3">
             <img class="rounded-circle" src="{{asset('img/about3.jpg')}}" alt="Generic placeholder image" width="140" height="140">
@@ -109,13 +109,6 @@
         <!-- /END THE FEATURETTES -->
 
       </div><!-- /.container -->
-
-
-      <!-- FOOTER -->
-      <footer class="container">
-        <p class="float-right"><a href="#">Back to top</a></p>
-        <p>&copy; 2017-2018 Company, Inc. &middot; <a href="#">Privacy</a> &middot; <a href="#">Terms</a></p>
-      </footer>
     </main>
 
 {% endblock %}

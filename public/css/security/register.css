@@ -1,9 +1,9 @@
-.form_group_etape1{
+.form_group_etape{
 	display: flex;
 	justify-content: space-between;
 	flex-direction: row;
 }
-.form_group_etape1 div{
+.form_group_etape div{
 	width: 45%;
 }
 .etape{
@@ -40,5 +40,8 @@
 	display: none
 }
 button[type="submit"]{
+	display: none;
+}
+#input_autre, #btn_new_add{
 	display: none;
 }

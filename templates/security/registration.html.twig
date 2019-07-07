@@ -15,17 +15,19 @@
 		<input type="hidden" value="1" id="current_step">
 		<input type="hidden" value="P" id="type_compte">
 		{{ form_start(form) }}
+		<input type="hidden" name="experiences">
+		<input type="hidden" name="langues">
 		<div class="row formulaire">
 			<div class="col-lg-10 etape" id="etape1">
 				<h1 id="etape__title">Etape N°1</h1>
-				<div class="form-group form_group_etape1">
-					{{ form_row(form.username, {'attr' : {'placeholder' : 'Username', 'class' : 'form-control'} }) }}
-					{{ form_row(form.email, { 'attr' : {'placeholder' : 'E-mail...', 'class' : 'form-control'} }) }}
+				<div class="form-group form_group_etape">
+					{{ form_row(form.username, {'attr' : {'class' : 'form-control'} }) }}
+					{{ form_row(form.email, { 'attr' : {'class' : 'form-control'} }) }}
 				</div>
 				
-				<div class="form-group form_group_etape1">
-					{{ form_row(form.password, { 'attr' : {'placeholder' : 'Password', 'class' : 'form-control'} }) }}
-					{{ form_row(form.comfirmPassword, { 'attr' : {'placeholder' : 'Comfirm Password', 'class' : 'form-control'} }) }}
+				<div class="form-group form_group_etape">
+					{{ form_row(form.password, { 'attr' : {'class' : 'form-control'} }) }}
+					{{ form_row(form.comfirmPassword, { 'attr' : {'class' : 'form-control'} }) }}
 				</div>
 				{{ form_rest(form) }}
 			</div>
@@ -42,8 +44,73 @@
 				</div>
 			</div>
 			<div class="col-lg-10 etape" id="etape3">
-				{{ form_widget(entrepriseForm) }}
-				{{ form_widget(particulierForm) }}
+				<div id="particulier">
+					<div class="form-group form_group_etape">
+						{{ form_row(particulierForm.nom, {'attr' : {'class' : 'form-control'} }) }}
+						
+						{{ form_row(particulierForm.prenom, {'attr' : {'class' : 'form-control'} }) }}
+					</div>
+
+					<div class="form-group form_group_etape">
+						<div>
+							<label for="particulier_sexe">Sexe</label>
+							<select id="particulier_sexe" name="particulier[sexe]" class="form-control">
+								<option value="F">Féminin</option>
+								<option value="M">Masculin</option>
+							</select>
+						</div><div class="col-lg-1"></div>
+						{{ form_row(particulierForm.telephone, {'attr' : {'class' : 'form-control'} }) }}
+					</div>
+					<div class="form-group">
+						{{ form_row(particulierForm.profession, {'attr' : {'class' : 'form-control'} }) }}
+					</div>
+					<div class="form-group">
+						{# {{ form_row(particulierForm.langues, {'attr' : {'class' : 'form-control'} }) }} #}
+						<select multiple id="langues_choice" class="form-control">
+							{% for lang in langues %}
+								<option value="{{lang.id}}">{{lang.libelle}}</option>
+							{% endfor %}
+						</select>
+					</div>
+					<div class="row">
+						<div class="col-lg-6">
+							<div class="d-flex justify-content-between">
+								<select id="experiences_choice" class="form-control col-lg-10">
+									{% for exp in experiences %}
+										<option value="{{exp.id}}">{{exp.description}}</option>
+									{% endfor %}
+								</select>
+								<span id="btn__add" class="btn btn-outline-success col-lg-2">
+									<span class="fa fa-plus"></span>
+								</span>
+							</div>
+
+							<div class="d-flex justify-content-between mt-3">
+								<span id="btn__autre" class="btn btn-outline-warning">Autres</span>
+
+								<input id="input_autre" type="text" class="form-control">
+
+								<span class="btn btn-outline-success" id="btn_new_add">
+									<i class="fa fa-plus"></i>
+								</span>
+							</div>
+						</div>
+						<div class="col-lg-6">
+							<select multiple  id="experiences" class="form-control"></select>
+						</div>
+					</div>
+				</div>
+				<div id="entreprise">
+					<div class="form-group form_group_etape">
+						{{ form_row(entrepriseForm.nom, {'attr' : {'class' : 'form-control'} }) }}
+					</div>
+					<div class="form-group">
+						{{ form_row(entrepriseForm.secteur, {'attr' : {'class' : 'form-control'} }) }}
+					</div>
+					<div class="form-group">
+						{{ form_row(entrepriseForm.localisation, {'attr' : {'class' : 'form-control'} }) }}
+					</div>					
+				</div>
 			</div>
 		</div>
 

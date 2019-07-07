@@ -84,12 +84,12 @@ class Entreprise
         return $this;
     }
 
-    public function getSecteur(): ?string
+    public function getSecteur(): ?Secteur
     {
         return $this->secteur;
     }
 
-    public function setSecteur(string $secteur): self
+    public function setSecteur(?Secteur $secteur): self
     {
         $this->secteur = $secteur;
 
@@ -213,5 +213,30 @@ class Entreprise
     public function __toString()
     {
        return $this->nom;
+    }
+
+    public function getPartenaires() {
+        $particuliers = new ArrayCollection();
+
+        foreach ($this->formations as $formation) {
+
+            foreach ($formation->getPostulants() as $particulier) {
+                if (!$particuliers->contains($particulier)) {
+                    $particuliers[] = $particulier;
+                }
+            }
+
+        }
+
+        foreach ($this->offres as $offre) {
+
+            foreach ($offre->getPostulants() as $particulier) {
+                if (!$particuliers->contains($particulier)) {
+                    $particuliers[] = $particulier;
+                }
+            }
+        }
+
+        return $particuliers;
     }
 }

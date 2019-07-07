@@ -207,6 +207,20 @@ class Offre
         return $this->competenceOffres;
     }
 
+    // public function setCompetenceOffres(ArrayCollection $competenceOffres): self
+    // {
+    //     $this->competenceOffres = $competenceOffres;
+        
+    //     return $this;
+    // }
+
+    public function emptyCompetenceOffres(): self
+    {
+        $this->competenceOffres = new ArrayCollection();
+        
+        return $this;
+    }
+
     public function addCompetenceOffre(CompetenceOffre $competenceOffre): self
     {
         if (!$this->competenceOffres->contains($competenceOffre)) {
@@ -275,5 +289,13 @@ class Offre
     public function __toString()
     {
        return $this->titre;
+    }
+
+    public function isSuscribed(Particulier $postulant)
+    {
+        if ($this->postulants->contains($postulant)) {
+            return true;
+        }
+        return false;
     }
 }

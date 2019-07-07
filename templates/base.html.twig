@@ -1,12 +1,185 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="UTF-8">
-        <title>{% block title %}Welcome!{% endblock %}</title>
-        {% block stylesheets %}{% endblock %}
-    </head>
-    <body>
-        {% block body %}{% endblock %}
-        {% block javascripts %}{% endblock %}
-    </body>
+	<head>
+		<meta charset="UTF-8">
+		<title>{% block title %}Welcome!{% endblock %}</title>
+		<link rel="stylesheet" href="{{ asset('css/bootstrap/bootstrap.css') }}"/>
+		<link rel="stylesheet" href="{{ asset('css/bootstrap/font-awesome.css') }}"/>
+		<link rel="stylesheet" href="{{ asset('css/bootstrap/carousel.css') }}"/>
+		{# <link rel="stylesheet" href="{{ asset('css/bootstrap/album.css') }}"/> #}
+		<link rel="stylesheet" href="{{ asset('css/all/style.css') }}"/>
+		<link rel="stylesheet" href="{{ asset('css/all/chat.css') }}"/>
+		{% block stylesheets %}{% endblock %}
+	</head>
+	<body>
+		<header>
+			<nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+				<a class="navbar-brand" href="{{ path('home') }}">SELECT JOB</a>
+				<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+					<span class="navbar-toggler-icon"></span>
+				</button>
+				<div class="collapse navbar-collapse" id="navbarCollapse">
+					<ul class="navbar-nav mr-auto">
+						<li class="nav-item active">
+							<a class="nav-link" href="{{ path('home') }}">Accueil <span class="sr-only">(current)</span></a>
+						</li>
+
+						<li class="nav-item">
+							<a class="nav-link" href="#"><span>A propos</span></a>
+						</li>
+
+						<li class="nav-item">
+							<a class="nav-link" href="#"><span>Nous Contacter</span></a>
+						</li>
+
+						{% if not app.user %}
+							<li class="nav-item">
+								<a class="nav-link" href="{{ path('security_login') }}">Connexion</a>
+							</li>
+						{% else %}
+							<li class="nav-item">
+								<a class="nav-link" href="{{ path('security_logout') }}">Déconnexion</a>
+							</li>
+						{% endif %}
+
+						<li class="nav-item">
+							<a class="nav-link" id="msg_init"><i class="fa fa-envelope-o fa-3x"></i></a>
+						</li>
+					</ul>
+
+					{% if app.user %}
+						<div class="dropdown show" style="margin-right : 100px;">
+							<button class="btn btn-outline-secondary dropdown-toggle" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+								<span class="fa fa-user fa-2x"></span>
+							</button>
+							<div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+								<a class="dropdown-item" href="{{path('user_profil')}}">Mon profil</a>
+								{% if app.user.particulier %}
+									<a class="dropdown-item" href="{{path('user_annonces')}}">Mes demandes</a>
+								{% elseif app.user.entreprise %}
+									<a class="dropdown-item" href="{{path('user_annonces')}}">Mes Annonces</a>
+									<a class="dropdown-item" href="{{path('formations_add')}}">new formation</a>
+									<a class="dropdown-item" href="{{path('offres_add', {'type' : '2'})}}">new stage</a>
+									<a class="dropdown-item" href="{{path('offres_add', {'type' : '1'})}}">new emploi</a>
+								{% endif %}
+
+							</div>
+						</div>
+					{% endif %}
+				</div>
+			</nav>
+		</header>
+
+		{% block body %}{% endblock %}
+
+		{% if app.user %}
+
+			<input id="___me___" type="hidden" value="{{ app.user.id }}">
+			<input id="___you___" type="hidden" value="">
+			{% if app.user.particulier %}
+				<input id="___utilisateur___" type="hidden" value="P">
+			{% elseif app.user.entreprise %}
+				<input id="___utilisateur___" type="hidden" value="E">
+			{% endif %}
+
+
+			<div id="msg_container">
+				<div ="container-fluid h-100">
+					<div class="row justify-content-left h-100">
+						<div class="col-md-4 col-xl-3">
+							<div class="card mb-sm-3 mb-md-0 contacts_card">
+								<div class="card-header">
+									<div class="input-group">
+										<input type="text" placeholder="Search..." name="" class="form-control search">
+										<div class="input-group-prepend">
+											<span class="input-group-text search_btn"><i class="fa fa-search"></i></span>
+										</div>
+									</div>
+								</div>
+								<div class="card-body contacts_body">
+									<ui class="contacts">
+										{% if app.user.particulier %}
+
+											{% for entreprise in app.user.particulier.getPartenaires() %}
+												<li class="active entreprise" id="entreprise___{{ entreprise.id }}" onclick="loadDiscussions({{ app.user.id }}, {{ entreprise.user.id }})">
+													<div class="d-flex bd-highlight">
+														<div class="img_cont">
+															<img src="{{asset('img/building.png')}}" class="rounded-circle user_img">
+															<span class="online_icon"></span>
+														</div>
+														<div class="user_info">
+															<span>{{ entreprise.nom }}</span>
+															{# <p>Maryam is online</p> #}
+														</div>
+													</div>
+												</li>
+											{% endfor %}
+
+										{% elseif app.user.entreprise %}
+											{% for particulier in app.user.entreprise.getPartenaires() %}
+												<li class="active particulier" id="particulier___{{ particulier.id }}" onclick="loadDiscussions({{ app.user.id }}, {{ particulier.user.id }})">
+													<div class="d-flex bd-highlight">
+														<div class="img_cont">
+															<img src="{{asset('img/user.png')}}" class="rounded-circle user_img">
+															<span class="online_icon"></span>
+														</div>
+														<div class="user_info">
+															<span>{{ particulier.nom }} {{ particulier.prenom }}</span>
+															{# <p>Maryam is online</p> #}
+														</div>
+													</div>
+												</li>
+											{% endfor %}
+										{% endif %}
+									</ui>
+								</div>
+								<div class="card-footer"></div>
+							</div>
+						</div>
+						
+						<div class="col-sm-3  frame">
+							<ul id="chat_ul">
+								{# <li style="width:100%">
+									<div class="msj macro">
+										<div class="avatar">
+											<img class="img-circle" style="width:100%;" src="{{asset('img/user.png')}}">
+										</div>
+										<div class="text text-l">
+											<p>Hello Tom...</p>
+											<p><small>7:08 AM</small></p>
+										</div>
+									</div>
+								</li> #}
+							</ul>
+							<div>
+								<div class="msj-rta macro">                        
+									<div class="text text-r" style="background:whitesmoke !important">
+										<input id="chat__input" class="mytext" placeholder="Type a message"/>
+									</div>
+								</div>
+								<div style="padding:10px;">
+									<img id="send__btn" src="{{ asset('img/send.png') }}" style="width: 47px !important;">
+								</div>
+							</div>
+						</div>
+
+					</div>
+				</div>
+			</div>
+
+		{% endif %}
+
+
+		<footer></footer>
+
+		<script src="{{ asset('js/jquery/jquery-slim.min.js') }}"></script>
+		<script src="{{ asset('js/jquery/jquery-3.2.1.min.js') }}"></script>
+		<script src="{{ asset('js/bootstrap/bootstrap.min.js') }}"></script>
+		<script src="{{ asset('js/bootstrap/popper.min.js') }}"></script>
+		<script src="{{ asset('js/bootstrap/holder.min.js') }}"></script>
+		<script src="{{ asset('js/bootstrap/clipboard.min.js') }}"></script>
+		<script src="{{ asset('js/all/chat.js') }}"></script>
+		{% block javascripts %}{% endblock %}
+		<script>document.write('<script src="http://' + (location.host || 'localhost').split(':')[0] + ':35729/livereload.js?snipver=1"></' + 'script>')</script>
+	</body>
 </html>

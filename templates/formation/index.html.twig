@@ -8,6 +8,11 @@
 
 {% block body %}
 	<div role="main" class="container">
+		{% if app.user %}
+			{% if app.user.particulier %}
+				<input type="hidden" value="{{ app.user.particulier.id }}" id="particulier">
+			{% endif %}
+		{% endif %}
 		<div class="row">
 			{% for formation in formations %}
 				<div class="col-md-4">
@@ -34,7 +39,7 @@
 								</div>
 								<div class="col-lg-6">
 									<div class="text-left">
-										<b><a href="#">{{ formation.auteur }}</a></b>
+										<b><a href="{{ path('user_profil', {user: formation.auteur.user.id}) }}">{{ formation.auteur }}</a></b>
 									</div>
 								</div>
 							</div>
@@ -49,7 +54,6 @@
 									<div class="text-left"><b>{{ formation.fraisInscription }}Fcfa</b></div>
 								</div>	
 							</div>
-							</div>
 							<div class="row">
 								<div class="col-lg-6">
 									<div class="text-right">
@@ -61,18 +65,52 @@
 									<div class="text-left"><b>{{ formation.lieu }}</b></div>
 								</div>	
 							</div>
-							<div class="d-flex justify-content-between align-items-center">
-								<div class="btn-group">
-									<a href="#">
-										<button class="btn btn-success">s'inscrire</button>
-									</a>
-								</div>
-								<small class=""> places restantes</small>
-							</div>
+							{% if app.user %}
+								{% if app.user.particulier %}
+									<div class="d-flex justify-content-between align-items-center">
+										<div class="bd-example" id="formation_state{{ formation.id }}">
+										  <button type="button" value="{{ formation.id }}" class="btn btn-primary btn-inscrire" data-toggle="modal" data-target="#exampleModalLive" style="border-radius: 14.25rem;{% if formation.isSuscribed(app.user.particulier) %} display: none;{% endif %}" >
+											S'inscrire
+										  </button>
+										  <button id="btn-desinscrire{{ formation.id }}" type="button" value="{{ formation.id }}" class="btn btn-danger btn-desinscrire" style="border-radius: 14.25rem; {% if not formation.isSuscribed(app.user.particulier) %} display: none;{% endif %}" >
+											<span class="fa fa-trash-o"></span> Anuller l'inscription
+										  </button>
+										</div>
+									</div>
+								{% endif %}
+							{% endif %}
 						</div>
 					</div>
 				</div>
 			{% endfor %}
+			{% if formations | length == 0 %}
+				<p class="lead">Ooups !!! Aucune offre part ici !</p>
+			{% endif %}
 			</div>
 	</div>
+	
+
+	{% if app.user %}
+		{% if app.user.particulier %}
+			<div id="exampleModalLive" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="exampleModalLiveLabel" aria-hidden="true">
+			  <div class="modal-dialog" role="document">
+				<div class="modal-content">
+				  <div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLiveLabel">Confirmation de l'inscription</h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					  <span aria-hidden="true">&times;</span>
+					</button>
+				  </div>
+				  <div class="modal-body">
+					<b>Monsieur <b class="lead">{{ app.user.particulier.prenom }}</b>, etes-vous sur de vouloir participer à cette formation ?</b>
+				  </div>
+				  <div class="modal-footer">
+					<button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
+					<button type="button" id="btn-confirmer" value="" class="btn btn-primary" data-dismiss="modal">Confirmer</button>
+				  </div>
+				</div>
+			  </div>
+			</div>
+		{% endif %}
+	{% endif %}
 {% endblock %}
